@@ -1,26 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
+import { Admin, Resource, ShowGuesser, ListGuesser } from 'react-admin';
+import crudProvider from '@fusionworks/ra-data-nest-crud';
+import { GuestCreate, GuestEdit } from './Guests';
+const dataProvider = crudProvider('http://localhost:3000');
+const App = () => (
+  <Admin dataProvider={dataProvider}>
+    <Resource name="guests" list={ListGuesser} create={GuestCreate} edit={GuestEdit} show={ShowGuesser} />
+  </Admin>
+);
 export default App;
